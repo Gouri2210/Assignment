@@ -1,0 +1,31 @@
+
+<form form="MyForm" #frm="ngForm" (ngSubmit)="frm.form.valid && SubmitFun(frm.value)">
+    
+        <input type="hidden" name="id" #id="ngModel" ngModel [(ngModel)]="idd" >    
+        <div class="form-group">
+            <label for="ttl">Task name</label><span style="color:red">*</span>
+            <input type="text" class="form-control" name='ttl' #ttl="ngModel" ngModel [(ngModel)]="title"
+            required minlength="5" [ngClass]="{'is-invalid': frm.submitted && ttl.invalid }">
+
+            <div *ngIf="ttl.touched" class="invalid-feedback">
+                <div *ngIf="ttl.errors?.['required']">Title is required</div>
+                <div *ngIf="ttl.errors?.['minlength']">Minimum length</div>
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+              <label>Status :(Complete/not complete)</label>&nbsp;&nbsp;&nbsp;
+              <input type="radio" name="comp" class="form-check-input" value="Yes" #comp="ngModel" ngModel [(ngModel)]="cmp">
+              <label>Yes </label>&nbsp;&nbsp;
+              <input type="radio" name="comp" class="form-check-input" value="No" #comp="ngModel" ngModel [(ngModel)]="cmp">
+              <label>No </label>&nbsp;&nbsp;
+        </div>
+              
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary mt-3" routerLink="/first/b" (click)="SubmitFun(frm.value)">Submit</button>
+            <button  class="btn btn-primary mt-3 ms-5" (click)="update(frm.value)" routerLink="/first/b" >Update</button>
+
+        </div>
+        
+</form>
+
